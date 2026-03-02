@@ -126,33 +126,39 @@
                 <p class="section-subtitle">Tell us about your security needs and we'll get back to you within 24 hours.</p>
             </div>
             <div class="form-wrapper">
-                <form id="quoteForm" class="quote-form">
+                <form id="quoteForm" class="quote-form" action="https://formsubmit.co/info@fluxsec.ai" method="POST">
+                    <!-- FormSubmit configuration -->
+                    <input type="hidden" name="_subject" value="New Quote Request — FluxSec">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="https://fluxsec.ai/thank-you.html">
+                    <input type="text" name="_honey" style="display:none">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                            <input type="text" id="name" name="Full Name" required placeholder="John Doe">
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="john@company.com">
+                            <input type="email" id="email" name="Email" required placeholder="john@company.com">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="company">Company</label>
-                            <input type="text" id="company" name="company" placeholder="Company Inc.">
+                            <input type="text" id="company" name="Company" placeholder="Company Inc.">
                         </div>
                         <div class="form-group">
                             <label for="service">Service Interested In</label>
-                            <select id="service" name="service">
-                                <option value="ai-pentest">AI-Powered Penetration Testing</option>
-                                <option value="other">Other</option>
+                            <select id="service" name="Service">
+                                <option value="AI-Powered Penetration Testing">AI-Powered Penetration Testing</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message">Project Details</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Describe your security assessment needs, scope, and any specific requirements..."></textarea>
+                        <textarea id="message" name="Project Details" rows="5" placeholder="Describe your security assessment needs, scope, and any specific requirements..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">Send Request</button>
                 </form>
@@ -227,28 +233,6 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        });
-
-        // Form submission via mailto
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const company = document.getElementById('company').value;
-            const service = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
-            const message = document.getElementById('message').value;
-
-            const subject = encodeURIComponent(`Quote Request from ${name} - ${company || 'N/A'}`);
-            const body = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Company: ${company || 'N/A'}\n` +
-                `Service: ${service}\n\n` +
-                `Project Details:\n${message}`
-            );
-
-            window.location.href = `mailto:info@fluxsec.ai?subject=${subject}&body=${body}`;
         });
 
         // Intersection Observer for scroll animations
