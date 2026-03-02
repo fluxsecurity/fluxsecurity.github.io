@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Penetration Testing — FluxSec</title>
+    <meta name="description" content="Our AI-powered penetration testing methodology. Intelligent, adaptive, and comprehensive security assessment across your entire attack surface.">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Service page specific styles */
+        .service-hero {
+            padding: 10rem 0 5rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-hero .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+        }
+
+        .service-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--text-primary);
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+        }
+
+        .service-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            line-height: 1.7;
+        }
+
+        /* Methodology section */
+        .methodology {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .methodology-intro {
+            max-width: 700px;
+            margin-bottom: 4rem;
+        }
+
+        .methodology-intro h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .methodology-intro p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .phases {
+            display: grid;
+            gap: 0;
+        }
+
+        .phase {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .phase.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .phase:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding-top: 0.25rem;
+        }
+
+        .phase-content h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .phase-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .phase-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .phase-tag {
+            display: inline-block;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .service-cta {
+            padding: 6rem 0;
+            text-align: center;
+            background: var(--bg-primary);
+        }
+
+        .service-cta h2 {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .service-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-cta .btn {
+            margin: 0 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .phase {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .service-hero {
+                padding: 8rem 0 3rem;
+            }
+
+            .methodology {
+                padding: 4rem 0;
+            }
+
+            .service-cta .btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/images/logo-white.svg" alt="FluxSec Logo" class="logo-img">
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#quote">Get a Quote</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Service Hero -->
+    <section class="service-hero">
+        <div class="grid-overlay"></div>
+        <div class="container service-hero-content">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="index.html#services">Services</a>
+                <span>/</span>
+                AI Penetration Testing
+            </div>
+            <h1>AI-Powered<br>Penetration Testing</h1>
+            <p class="service-hero-desc">
+                Our autonomous AI agents simulate real-world adversaries across your entire attack surface. Unlike traditional pentesting, our approach adapts in real-time, chains vulnerabilities together, and provides continuous assessment — not just a point-in-time snapshot.
+            </p>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="methodology">
+        <div class="container">
+            <div class="methodology-intro">
+                <h2>Our Testing Methodology</h2>
+                <p>
+                    Our AI-driven approach follows a structured methodology designed to maximize coverage and uncover vulnerabilities that traditional automated tools and manual testers often miss.
+                </p>
+            </div>
+
+            <div class="phases">
+
+                <div class="phase">
+                    <div class="phase-number">Phase 01</div>
+                    <div class="phase-content">
+                        <h3>Reconnaissance & Asset Discovery</h3>
+                        <p>
+                            Our AI agents begin by mapping your entire external and internal attack surface. Using intelligent crawling, DNS enumeration, service fingerprinting, and OSINT collection, we build a comprehensive asset inventory — identifying forgotten subdomains, shadow IT, exposed APIs, and third-party integrations.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">Asset Discovery</span>
+                            <span class="phase-tag">OSINT</span>
+                            <span class="phase-tag">DNS Enumeration</span>
+                            <span class="phase-tag">Service Fingerprinting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-number">Phase 02</div>
+                    <div class="phase-content">
+                        <h3>Threat Modeling & Attack Planning</h3>
+                        <p>
+                            Based on the discovered assets and technology stack, our AI constructs a dynamic threat model. It prioritizes targets based on business criticality, known vulnerability patterns, and attack surface exposure — then generates an adaptive attack plan tailored to your specific environment.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">Threat Modeling</span>
+                            <span class="phase-tag">Risk Prioritization</span>
+                            <span class="phase-tag">Attack Path Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-number">Phase 03</div>
+                    <div class="phase-content">
+                        <h3>Automated Vulnerability Assessment</h3>
+                        <p>
+                            Leveraging both known CVE databases and proprietary detection logic, our AI performs deep vulnerability scanning across web applications, APIs, cloud configurations, and network services. It goes beyond signature matching — using contextual analysis to identify logic flaws and misconfigurations.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">CVE Detection</span>
+                            <span class="phase-tag">Web Application Testing</span>
+                            <span class="phase-tag">API Security</span>
+                            <span class="phase-tag">Cloud Misconfigurations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-number">Phase 04</div>
+                    <div class="phase-content">
+                        <h3>AI-Driven Exploitation & Validation</h3>
+                        <p>
+                            Our AI agents attempt safe, controlled exploitation of discovered vulnerabilities to validate their real-world impact. Unlike scanners that report theoretical risks, we prove exploitability — chaining vulnerabilities together to demonstrate realistic attack scenarios and lateral movement paths.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">Exploit Validation</span>
+                            <span class="phase-tag">Vulnerability Chaining</span>
+                            <span class="phase-tag">Lateral Movement</span>
+                            <span class="phase-tag">Privilege Escalation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-number">Phase 05</div>
+                    <div class="phase-content">
+                        <h3>Post-Exploitation & Impact Analysis</h3>
+                        <p>
+                            After successful exploitation, our AI evaluates the true business impact. This includes assessing data access, lateral movement potential, persistence mechanisms, and the blast radius of each compromise — providing a clear picture of what an attacker could actually achieve.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">Impact Assessment</span>
+                            <span class="phase-tag">Data Exposure Analysis</span>
+                            <span class="phase-tag">Blast Radius Mapping</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-number">Phase 06</div>
+                    <div class="phase-content">
+                        <h3>Reporting & Remediation Guidance</h3>
+                        <p>
+                            We deliver detailed, prioritized reports with executive summaries and technical deep-dives. Every finding includes proof-of-concept evidence, CVSS scoring, step-by-step remediation guidance, and verification procedures — giving your team everything needed to fix issues quickly and effectively.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">Executive Report</span>
+                            <span class="phase-tag">Technical Deep-Dive</span>
+                            <span class="phase-tag">Remediation Playbooks</span>
+                            <span class="phase-tag">CVSS Scoring</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase">
+                    <div class="phase-number">Phase 07</div>
+                    <div class="phase-content">
+                        <h3>Continuous Monitoring & Retesting</h3>
+                        <p>
+                            Security is not a one-time exercise. After remediation, our AI continuously monitors your environment for new vulnerabilities, configuration drift, and emerging threats — retesting fixed issues to ensure they stay resolved and your security posture keeps improving.
+                        </p>
+                        <div class="phase-tags">
+                            <span class="phase-tag">Continuous Assessment</span>
+                            <span class="phase-tag">Retest Verification</span>
+                            <span class="phase-tag">Drift Detection</span>
+                            <span class="phase-tag">Threat Intelligence</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="service-cta">
+        <div class="container">
+            <h2>Ready to Secure Your Organization?</h2>
+            <p>Let our AI find your vulnerabilities before attackers do.</p>
+            <div>
+                <a href="index.html#quote" class="btn btn-primary">Get a Quote</a>
+                <a href="mailto:info@fluxsec.ai" class="btn btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <img src="assets/images/logo-white.svg" alt="FluxSec Logo" class="logo-img">
+            </div>
+            <div class="footer-links">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#quote">Get a Quote</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Flux Security. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.phase').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
